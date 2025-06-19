@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Shayari</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe9ec, #ffe3f1);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 60px 20px;
+      text-align: center;
+      color: #7c2d5f;
+      overflow: hidden;
+    }
+    h2 {
+      font-size: 2.5rem;
+      color: #c9184a;
+    }
+    .shayari-box {
+      background: white;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    p {
+      font-size: 1.3rem;
+      line-height: 2;
+      font-style: italic;
+    }
+    .floating-decor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart, .flower {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      animation: floatDecor 10s linear infinite;
+    }
+    .heart {
+      background: red;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    .flower {
+      background: pink;
+      border-radius: 50% 50% 0 0;
+    }
+    @keyframes floatDecor {
+      0% { bottom: 0; opacity: 1; }
+      100% { bottom: 100%; left: calc(100% * var(--random)); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-decor"></div>
+  <h2>💌 Tumhare Naam Ek Shayari 💌</h2>
+  <div class="shayari-box">
+    <p>
+      Tere chehre pe muskan mere dil ka sukoon hai,<br>
+      Tere hone se meri har dua qubool hai.<br><br>
+
+      Tujhme basi hai meri duniya, tu meri khushi ka sabab hai,<br>
+      Tere saath jeena hi toh meri zindagi ka maksad hai.<br><br>
+
+      Tera janamdin aaya hai, dil se tujhe yaad kiya,<br>
+      Teri khushi ke liye maine har khuda se faryaad kiya. 💖
+    </p>
+  </div>
+  <script>
+    const decorContainer = document.querySelector('.floating-decor');
+
+    function createDecor() {
+      const decor = document.createElement('div');
+      const isHeart = Math.random() > 0.5;
+      decor.classList.add(isHeart ? 'heart' : 'flower');
+      decor.style.left = Math.random() * 100 + 'vw';
+      decor.style.animationDuration = (6 + Math.random() * 4) + 's';
+      decor.style.setProperty('--random', Math.random());
+      decorContainer.appendChild(decor);
+      setTimeout(() => decor.remove(), 12000);
+    }
+
+    setInterval(createDecor, 350);
+  </script>
+</body>
+</html>

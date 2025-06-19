@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dil Se Kuch Baatein</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fffafc, #ffe6eb);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 60px 20px;
+      text-align: center;
+      color: #5c1a37;
+      overflow-x: hidden;
+    }
+    h2 {
+      font-size: 2.3rem;
+      color: #c9184a;
+    }
+    .image-box {
+      margin: 30px auto;
+      max-width: 100%;
+    }
+    img {
+      width: 100%;
+      max-width: 700px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .box {
+      background: white;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    p {
+      font-size: 1.3rem;
+      line-height: 2.2;
+      color: #5c1a37;
+    }
+    .floating-decor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart, .flower {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      animation: floatDecor 10s linear infinite;
+    }
+    .heart {
+      background: red;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    .flower {
+      background: pink;
+      border-radius: 50% 50% 0 0;
+    }
+    @keyframes floatDecor {
+      0% { bottom: 0; opacity: 1; }
+      100% { bottom: 100%; left: calc(100% * var(--random)); opacity: 0; }
+    }
+    .love-animation {
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: #ff2e63;
+      font-weight: bold;
+      animation: lovePulse 2s infinite alternate ease-in-out;
+      z-index: 2;
+    }
+    @keyframes lovePulse {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-decor"></div>
+  <div class="love-animation">I Love You Soni ❤️</div>
+
+  <h2>💬 Dil Se Tumse...</h2>
+  <div class="image-box">
+    <img src="pic.jpg" alt="Ek Yaadgar Pal">
+  </div>
+  <div class="box">
+    <p>
+      Soni, tum meri zindagi ka wo hissa ho jiske bina har lamha adhoora lagta hai.<br><br>
+      Tumhari muskaan mein jadoo hai, tumhari baaton mein sukoon hai, aur tumhari aankhon mein meri duniya basi hai.<br><br>
+      Main chahta hoon ki har subah tumhari muskaan se ho aur har raat tumhari baahon mein khatam ho.<br><br>
+      Har janam mein sirf tum, sirf tum... kyunki tumse hi meri zindagi hai 💖
+    </p>
+  </div>
+
+  <script>
+    const decorContainer = document.querySelector('.floating-decor');
+
+    function createDecor() {
+      const decor = document.createElement('div');
+      const isHeart = Math.random() > 0.5;
+      decor.classList.add(isHeart ? 'heart' : 'flower');
+      decor.style.left = Math.random() * 100 + 'vw';
+      decor.style.animationDuration = (6 + Math.random() * 4) + 's';
+      decor.style.setProperty('--random', Math.random());
+      decorContainer.appendChild(decor);
+      setTimeout(() => decor.remove(), 12000);
+    }
+
+    setInterval(createDecor, 350);
+  </script>
+</body>
+</html>

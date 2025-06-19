@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soni's Surprise Login</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #ffe0ec, #ffe9f4);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      z-index: 1;
+    }
+    h2 {
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #ff4d6d;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: floatHeart 8s linear infinite;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes floatHeart {
+      0% { bottom: 0; opacity: 1; }
+      100% { bottom: 100%; left: calc(100% * var(--random)); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-hearts"></div>
+
+  <div class="login-box">
+    <h2>Welcome Soni ❤️</h2>
+    <p>Please enter your ID and password to continue</p>
+    <input type="text" id="username" placeholder="Enter ID">
+    <input type="password" id="password" placeholder="Enter Password">
+    <button onclick="checkLogin()">Unlock Surprise</button>
+    <p class="error" id="error-msg"></p>
+  </div>
+
+  <script>
+    function checkLogin() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("error-msg");
+
+      if (username === "soni_pinku" && password === "soni_pinku") {
+        window.location.href = "choice.html";
+      } else {
+        errorMsg.textContent = "Oops! Galat ID ya password. Try again with love. 💌";
+      }
+    }
+
+    const heartContainer = document.querySelector('.floating-hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+      heart.style.setProperty('--random', Math.random());
+      heartContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }
+    setInterval(createHeart, 400);
+  </script>
+</body>
+</html>
